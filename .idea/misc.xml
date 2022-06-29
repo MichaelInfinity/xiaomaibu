@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22083333333333333" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/drawable/buttonshapewhitebg.xml" value="0.26875" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/drawable/et_sharp.xml" value="0.2677083333333333" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/drawable/et_sharp2.xml" value="0.2677083333333333" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/drawable/et_sharp3.xml" value="0.31302083333333336" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/drawable/ic_email_white_24dp.xml" value="0.22083333333333333" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22083333333333333" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.22083333333333333" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/drawable/ic_lock_white_24dp.xml" value="0.22083333333333333" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/drawable/ic_menu_camera.xml" value="0.22083333333333333" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.22083333333333333" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/drawable/image_shadow.xml" value="0.22135416666666666" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/drawable/side_nav_bar.xml" value="0.22083333333333333" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/activity_community_info.xml" value="0.33" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/activity_signup.xml" value="0.22" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/activity_user_info.xml" value="0.22" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/activity_usermain.xml" value="0.25" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/app_bar_usermain_acivity.xml" value="0.2046875" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/community_apply_item.xml" value="0.33" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/community_info_item.xml" value="0.67" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/community_item.xml" value="0.25" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/content_usermain_acivity.xml" value="0.2046875" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/fragment_details.xml" value="0.2046875" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/fragment_feed.xml" value="0.2046875" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/fragment_gallery.xml" value="0.25" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/fragment_slideshow.xml" value="0.2046875" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/horizontal_feed_layout.xml" value="0.2046875" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/image_shadow.xml" value="0.20520833333333333" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/item_horizontal_feed.xml" value="0.2046875" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/nav_header_usermain_acivity.xml" value="0.25" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/layout/signup.xml" value="0.23802083333333332" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/menu/activity_usermain_drawer.xml" value="0.2046875" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/menu/usermain_acivity.xml" value="0.2046875" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.22083333333333333" />
+        <entry key="..\:/Code/xiaomaibu/app/src/main/res/xml/file_paths.xml" value="0.2046875" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.5036297640653358" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

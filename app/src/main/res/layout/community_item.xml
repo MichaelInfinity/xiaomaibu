@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.coorchice.library.SuperTextView
+        android:id="@+id/community_background"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:stv_stroke_width="3dp"
+        app:stv_stroke_color="@color/cardview_shadow_start_color"
+        app:stv_corner="25dp"
+        app:stv_isShowState="true"
+        app:stv_drawableAsBackground="true"
+        app:stv_state_drawable="@drawable/yunbianxiaomaibu"/>
+    <com.coorchice.library.SuperTextView
+        android:id="@+id/community_image"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="7.5dp"
+        app:stv_isShowState="true"
+        app:stv_drawableAsBackground="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:stv_state_drawable="@drawable/no_image"
+        app:stv_state_drawable_height="40dp"
+        app:stv_state_drawable_width="40dp"
+        app:stv_state_drawable_mode="left"
+        app:stv_corner="90dp"
+        app:stv_stroke_color="#fffccc"
+        app:stv_stroke_width="3dp"
+        app:stv_state_drawable_padding_left="10dp"/>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="7.5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/community_image">
+
+        <com.coorchice.library.SuperTextView
+            android:id="@+id/community_name"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="7.5dp"
+            android:fontFamily="@font/calibri"
+            android:text="你的社区的名字"
+            android:textSize="15dp"
+            android:gravity="bottom"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.coorchice.library.SuperTextView
+            android:id="@+id/community_introduce_little"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginTop="34dp"
+            android:gravity="bottom"
+            android:fontFamily="@font/calibri"
+            android:text="一小段简要介绍"
+            android:textSize="12dp"
+            android:textStyle="italic"
+            android:textColor="#83E378"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:stv_text_fill_color="#83E378"
+            app:stv_text_stroke="true"
+            app:stv_text_stroke_color="@color/white"
+            app:stv_text_stroke_width="2dp" />
+    </FrameLayout>
+</FrameLayout>
