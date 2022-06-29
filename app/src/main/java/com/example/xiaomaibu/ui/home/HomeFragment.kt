@@ -3,7 +3,6 @@ package com.example.xiaomaibu.ui.home
 import com.example.xiaomaibu.ui.home.HomeViewModel
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import android.widget.TextView
 import androidx.lifecycle.ViewModel
@@ -11,7 +10,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.LiveData
 import com.example.xiaomaibu.ui.gallery.GalleryViewModel
 import com.example.xiaomaibu.ui.slideshow.SlideshowViewModel
-import android.os.Build
 import androidx.core.content.FileProvider
 import androidx.appcompat.widget.AppCompatImageView
 import android.graphics.Bitmap
@@ -35,8 +33,6 @@ import androidx.core.app.ActivityCompat
 import android.provider.MediaStore
 import android.app.Activity
 import android.graphics.BitmapFactory
-import android.os.Handler
-import android.os.Message
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -65,6 +61,7 @@ import com.github.ybq.android.spinkit.style.DoubleBounce
 import com.github.ybq.android.spinkit.sprite.Sprite
 
 import android.R
+import android.os.*
 
 import android.widget.ProgressBar
 import com.github.ybq.android.spinkit.style.Wave
@@ -74,7 +71,7 @@ class HomeFragment : Fragment() {
     private var homeViewModel: HomeViewModel? = null
     private var binding: FragmentHomeBinding? = null
     var recycleView:RecyclerView?=null
-    var data:List<Map<String,String>>?=null
+    var data:List<Map<String,Any?>>?=null
 
     var inithandler = Handler {
         //创建adapter,getActivity获得Fragment依附的Activity对象
@@ -115,14 +112,15 @@ class HomeFragment : Fragment() {
         val msg = Message.obtain()
         msg.what = 0
         val bundle = Bundle()
-
+        val obsbug=ObsBug()
+        val obsClient=obsbug.connect_obsClient()
         Thread(object : Runnable {
             var conn: Connection? = null
             override fun run() {
                 try {
                     println("upload?")
                     conn = mysqlMinecraft.sql_connect()
-                    data = mysqlMinecraft.community_init(conn)
+                    data = mysqlMinecraft.community_init(conn,obsClient)
                     conn!!.close()
                 } catch (e: SQLException) {
                     e.printStackTrace()

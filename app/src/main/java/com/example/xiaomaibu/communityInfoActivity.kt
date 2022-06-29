@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.coorchice.library.SuperTextView
 import com.mikhaellopez.circularimageview.CircularImageView
+import com.obs.services.ObsClient
 import java.io.ByteArrayOutputStream
 import java.sql.Connection
 import java.sql.SQLException
@@ -28,7 +29,7 @@ class communityInfoActivity : AppCompatActivity() {
     var comm_user:RecyclerView?=null
     var career_app:EditText?=null
     var apply_but:SuperTextView?=null
-    var data:List<Map<String,String>>?=null
+    var data:List<Map<String,Any?>>?=null
     var comm_introduction:String? = null
     var flag:Int=1
 
@@ -88,17 +89,14 @@ class communityInfoActivity : AppCompatActivity() {
                 // EditText失去焦点
             }
         }
-        val image_String=Data.getChoose_community_Image()
-        if(image_String!="") {
-            val imageBytes1 = Base64.decode(image_String, Base64.DEFAULT)
-            val decodeImage= BitmapFactory.decodeByteArray(imageBytes1,0,imageBytes1.size)
-            comm_image!!.setImageBitmap(decodeImage)
+        val ImageString=Data.getChoose_community_Image()
+        val backgroundString = Data.getChoose_community_Background()
+        val obsbug = ObsBug()
+        if (backgroundString != null) {
+            comm_backg!!.setImageBitmap(backgroundString)
         }
-        val background_String = Data.getChoose_community_Background()
-        if(background_String!=""){
-            val imageBytes2=Base64.decode(background_String,Base64.DEFAULT)
-            val decodeBackg= BitmapFactory.decodeByteArray(imageBytes2,0,imageBytes2.size)
-            comm_backg!!.setImageBitmap(decodeBackg)
+        if (ImageString != null) {
+            comm_image!!.setImageBitmap(ImageString)
         }
         comm_name!!.setText(Data.getChoose_community_name())
         getData()
@@ -142,14 +140,15 @@ class communityInfoActivity : AppCompatActivity() {
         val msg = Message.obtain()
         msg.what = 0
         val bundle = Bundle()
-
+        val obsbug=ObsBug()
+        val obsClient=obsbug.connect_obsClient()
         Thread(object : Runnable {
             var conn: Connection? = null
             override fun run() {
                 try {
                     println("upload?")
                     conn = mysqlMinecraft.sql_connect()
-                    data = mysqlMinecraft.users_init(conn, comm_name!!.text.toString())
+                    data = mysqlMinecraft.users_init(conn, comm_name!!.text.toString(),obsClient)
                     conn!!.close()
                 } catch (e: SQLException) {
                     e.printStackTrace()
@@ -172,7 +171,6 @@ class communityInfoActivity : AppCompatActivity() {
             var conn: Connection? = null
             override fun run() {
                 try {
-                    println("upload?")
                     conn = mysqlMinecraft.sql_connect()
                     comm_introduction = mysqlMinecraft.Intro_init(conn, comm_name!!.text.toString())
                     conn!!.close()

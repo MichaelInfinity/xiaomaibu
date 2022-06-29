@@ -34,12 +34,17 @@ import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import android.provider.MediaStore
 import android.app.Activity
+import android.app.ActivityManager
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.graphics.BitmapFactory
 import android.os.Handler
 import android.os.Message
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.navigation.ui.AppBarConfiguration
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -57,7 +62,7 @@ import java.sql.SQLException
 class SlideshowFragment : Fragment() {
     private var slideshowViewModel: SlideshowViewModel? = null
     private var binding: FragmentSlideshowBinding? = null
-    var data:List<Map<String,String>>?=null
+    var data:List<Map<String,Any?>>?=null
     var newbitMap: Bitmap?=null
 
     var inithandler = Handler {
@@ -75,6 +80,15 @@ class SlideshowFragment : Fragment() {
         false
     }
 
+    var deletehandler = Handler {
+        //创建adapter,getActivity获得Fragment依附的Activity对象
+        val intent = Intent()
+        intent.setClass(requireContext(), MainActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
+        false
+    }
+
     var Imagehandler = Handler {
         //创建adapter,getActivity获得Fragment依附的Activity对象
         binding!!.communityApplyImage.setImageBitmap(newbitMap!!)
@@ -87,6 +101,9 @@ class SlideshowFragment : Fragment() {
         binding = FragmentSlideshowBinding.inflate(inflater, container, false)
         val root: View = binding!!.root
         getImage()
+        binding!!.communityDeleteImage.setOnClickListener {
+            communityDelete()
+        }
         getData()
         return root
     }
@@ -96,18 +113,58 @@ class SlideshowFragment : Fragment() {
         binding = null
     }
 
+    fun communityDelete(){
+        val alertDialog = AlertDialog.Builder(activity)
+            //标题
+            .setTitle("title")
+            //内容
+            .setMessage("真的要删除嘛\n删除后应用会重启，望周知")
+            //图标
+            .setIcon(binding!!.communityApplyImage.drawable)
+            .setPositiveButton("确认", DialogInterface.OnClickListener { dialogInterface, i -> realcommunityDelete() })
+            .create();
+        alertDialog.show();
+    }
+
+    fun realcommunityDelete()
+    {
+        val mysqlMinecraft = mysql_minecraft()
+        val msg = Message.obtain()
+        msg.what = 0
+        val bundle = Bundle()
+        val obsbug=ObsBug()
+        val obsClient=obsbug.connect_obsClient()
+        Thread(object : Runnable {
+            var conn: Connection? = null
+            override fun run() {
+                try {
+                    conn = mysqlMinecraft.sql_connect()
+                    mysqlMinecraft.comm_delete(conn, Data.getusername())
+                    conn!!.close()
+                } catch (e: SQLException) {
+                    e.printStackTrace()
+                }
+                bundle.putString("key", "123")
+                msg.data = bundle
+                deletehandler.sendMessage(msg)
+            }
+        }).start()
+    }
+
     fun getData()
     {
         val mysqlMinecraft = mysql_minecraft()
         val msg = Message.obtain()
         msg.what = 0
         val bundle = Bundle()
+        val obsbug=ObsBug()
+        val obsClient=obsbug.connect_obsClient()
         Thread(object : Runnable {
             var conn: Connection? = null
             override fun run() {
                 try {
                     conn = mysqlMinecraft.sql_connect()
-                    data = mysqlMinecraft.apply_init(conn, Data.getusername())
+                    data = mysqlMinecraft.apply_init(conn, Data.getusername(),obsClient)
                     conn!!.close()
                 } catch (e: SQLException) {
                     e.printStackTrace()
@@ -125,12 +182,14 @@ class SlideshowFragment : Fragment() {
         val msg = Message.obtain()
         msg.what = 0
         val bundle = Bundle()
+        val obsbug=ObsBug()
+        val obsClient=obsbug.connect_obsClient()
         Thread(object : Runnable {
             var conn: Connection? = null
             override fun run() {
                 try {
                     conn = mysqlMinecraft.sql_connect()
-                    newbitMap = mysqlMinecraft.commImage_download(conn, Data.getusername())
+                    newbitMap = mysqlMinecraft.commImage_download(conn, Data.getusername(),obsClient)
                     conn!!.close()
                 } catch (e: SQLException) {
                     e.printStackTrace()

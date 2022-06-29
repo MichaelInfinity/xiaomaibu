@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.xiaomaibu.ui.gallery.GalleryViewModel
 import com.example.xiaomaibu.ui.slideshow.SlideshowViewModel
-import com.example.xiaomaibu.ImageUtils
 import androidx.core.content.FileProvider
 import androidx.appcompat.widget.AppCompatImageView
 import android.graphics.Bitmap
@@ -20,19 +19,13 @@ import com.mikhaellopez.circularimageview.CircularImageView
 import android.widget.EditText
 import android.widget.Toast
 import android.content.Intent
-import com.example.xiaomaibu.usermainAcivity
-import com.example.xiaomaibu.R
 import android.view.View.OnFocusChangeListener
 import android.graphics.Typeface
-import com.example.xiaomaibu.mysql_minecraft
-import com.example.xiaomaibu.signup
 import kotlin.Throws
 import com.coorchice.library.SuperTextView
-import com.example.xiaomaibu.MainActivity
 import androidx.core.content.ContextCompat
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
-import com.example.xiaomaibu.userInfo_Activity
 import android.provider.MediaStore
 import android.app.Activity
 import android.content.Context
@@ -49,6 +42,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.navigation.NavController
 import androidx.navigation.ui.NavigationUI
+import com.example.xiaomaibu.*
 import com.example.xiaomaibu.databinding.FragmentGalleryBinding
 import com.william.base_component.extension.logE
 import com.william.base_component.extension.logV
@@ -138,12 +132,14 @@ class GalleryFragment : Fragment() {
         val msg = Message.obtain()
         msg.what = 0
         val bundle = Bundle()
+        val obsbug= ObsBug()
+        val obsClient=obsbug.connect_obsClient()
         Thread(object : Runnable {
             var conn: Connection? = null
             override fun run() {
                 try {
                     conn = mysqlMinecraft.sql_connect()
-                    flag = mysqlMinecraft.newCommUpload(conn, binding!!.communityUploadName.text.toString(),binding!!.communityUploadIntro.text.toString(),ImageBitmap!!,BackGroundBitmap!!)
+                    flag = mysqlMinecraft.newCommUpload(conn, binding!!.communityUploadName.text.toString(),binding!!.communityUploadIntro.text.toString(),ImageBitmap!!,BackGroundBitmap!!,obsClient)
                     conn!!.close()
                 } catch (e: SQLException) {
                     e.printStackTrace()
@@ -183,9 +179,7 @@ class GalleryFragment : Fragment() {
                     }
                 }
             } else {
-                val options = BitmapFactory.Options()
-                options.inSampleSize = 2
-                val bitmap = BitmapFactory.decodeStream(this.requireActivity().contentResolver.openInputStream(uri),null,options)
+                val bitmap = BitmapFactory.decodeStream(this.requireActivity().contentResolver.openInputStream(uri))
                 BackGroundBitmap = bitmap
                 binding!!.backgroundImageCommunity.setImageBitmap(bitmap)
             }

@@ -111,6 +111,8 @@ class userInfo_Activity : AppCompatActivity() {
         msg.what = 0
         val bundle = Bundle()
         var sql_username=username_text_info!!.text.toString()
+        val obsbug=ObsBug()
+        val obsClient=obsbug.connect_obsClient()
 
         Thread(object : Runnable {
             var conn: Connection? = null
@@ -118,7 +120,7 @@ class userInfo_Activity : AppCompatActivity() {
                 try {
                     println("upload?")
                     conn = mysqlMinecraft.sql_connect()
-                    decodebitmap = mysqlMinecraft.image_download(conn, sql_username)
+                    decodebitmap = mysqlMinecraft.image_download(conn, sql_username,obsClient)
                     conn!!.close()
                 } catch (e: SQLException) {
                     e.printStackTrace()
@@ -146,6 +148,8 @@ class userInfo_Activity : AppCompatActivity() {
         msg.what = 0
         val bundle = Bundle()
         var sql_username=username_text_info!!.text.toString()
+        val obsbug=ObsBug()
+        val obsClient=obsbug.connect_obsClient()
 
         Thread(object : Runnable {
             var conn: Connection? = null
@@ -153,7 +157,7 @@ class userInfo_Activity : AppCompatActivity() {
                 try {
                     println("upload?")
                     conn = mysqlMinecraft.sql_connect()
-                    sqlflag = mysqlMinecraft.image_upload(conn, sql_username, bitmap)
+                    sqlflag = mysqlMinecraft.image_upload(conn, sql_username, bitmap, obsClient)
                     conn!!.close()
                 } catch (e: SQLException) {
                     e.printStackTrace()

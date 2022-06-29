@@ -116,6 +116,8 @@ class usermainAcivity : AppCompatActivity() {
         msg.what = 0
         val bundle = Bundle()
         var sql_username=username_navheader!!.text.toString()
+        val obsbug=ObsBug()
+        val obsClient=obsbug.connect_obsClient()
 
         Thread(object : Runnable {
             var conn: Connection? = null
@@ -123,7 +125,7 @@ class usermainAcivity : AppCompatActivity() {
                 try {
                     println("upload?")
                     conn = mysqlMinecraft.sql_connect()
-                    decodebitmap = mysqlMinecraft.image_download(conn, sql_username)
+                    decodebitmap = mysqlMinecraft.image_download(conn, sql_username,obsClient)
                     conn!!.close()
                 } catch (e: SQLException) {
                     e.printStackTrace()
@@ -143,7 +145,18 @@ class usermainAcivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.action_settings->getback()
+        }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun getback()
+    {
+        val intent = Intent()
+        intent.setClass(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     override fun onSupportNavigateUp(): Boolean {

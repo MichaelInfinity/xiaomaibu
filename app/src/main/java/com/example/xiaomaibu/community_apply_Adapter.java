@@ -25,14 +25,14 @@ import java.util.Map;
 import jp.wasabeef.recyclerview.animators.holder.AnimateViewHolder;
 
 public class community_apply_Adapter extends RecyclerView.Adapter<community_apply_Adapter.MyViewHolder> {
-    private List<Map<String,String>> data;
+    private List<Map<String,Object>> data;
     private Context context;
     private View inflater;
     //标记被展开的item
     private int opened = -1;
     private int flag=0;
     /*构造函数*/
-    public community_apply_Adapter(Context context, List<Map<String,String>> data) {
+    public community_apply_Adapter(Context context, List<Map<String,Object>> data) {
         this.context = context;
         this.data = data;
     }
@@ -113,16 +113,11 @@ public class community_apply_Adapter extends RecyclerView.Adapter<community_appl
 
     //自定义方法，用于绑定数据
     public void bindView(@NonNull MyViewHolder holder, int position){
-        Bitmap ImageMap;
-        String ImageB64 = data.get(position).get("picture");
-        byte[] bytearray;
-        if(!ImageB64.equals("") && !ImageB64.equals(null)) {
-            ImageB64=ImageB64.replaceAll("\\n|\\t","");
-            bytearray = Base64.getDecoder().decode(ImageB64);
-            ImageMap = BitmapFactory.decodeByteArray(bytearray, 0, bytearray.length);
-            holder.communityImage.setDrawable(ImageMap);
+        Bitmap ImageB64 = (Bitmap)data.get(position).get("picture");
+        if(ImageB64!=null) {
+            holder.communityImage.setDrawable(ImageB64);
         }
-        holder.communityName.setText(data.get(position).get("username"));
-        holder.communityUserCareer.setText(data.get(position).get("career"));
+        holder.communityName.setText((String)data.get(position).get("username"));
+        holder.communityUserCareer.setText((String)data.get(position).get("career"));
     }
 }

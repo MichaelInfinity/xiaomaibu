@@ -44,11 +44,11 @@ public class Data extends Application {
     public static void setChoose_community_name(String community_name){
         choose_community_name=community_name;
     }
-    private static String choose_community_Image;
-    private static String choose_community_Background;
-    public static String getChoose_community_Image(){return choose_community_Image;}
-    public static String getChoose_community_Background(){return choose_community_Background;}
-    public static void setChoose_community_Image(String community_image,String community_background){
+    private static Bitmap choose_community_Image;
+    private static Bitmap choose_community_Background;
+    public static Bitmap getChoose_community_Image(){return choose_community_Image;}
+    public static Bitmap getChoose_community_Background(){return choose_community_Background;}
+    public static void setChoose_community_Image(Bitmap community_image,Bitmap community_background){
         choose_community_Image=community_image;
         choose_community_Background=community_background;
     }
